@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Runtime.InteropServices;
 
 namespace Komunikation_test
 {
@@ -68,6 +69,22 @@ namespace Komunikation_test
             btnContinue.Enabled = false;
             btnChangeSavePlace.Enabled = false;
             rbtnLoggerOn.Enabled = false;
+        }
+
+        //Turns off sleep mode on computer
+        [DllImport("kernel32.dll")]
+        public static extern uint SetThreadExecutionState(uint esFlags);       
+        public const uint ES_CONTINUOUS = 0x80000000;
+        public const uint ES_SYSTEM_REQUIRED = 0x00000001;
+
+        public static void PreventSleep()
+        {
+            SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED);
+        }
+
+        public static void RestoreSleep()
+        {
+            SetThreadExecutionState(ES_CONTINUOUS);
         }
 
         //Initialize Com port
@@ -288,6 +305,7 @@ namespace Komunikation_test
                 SetTextBoxReadOnly(kinetcEnergyInput, false);
                 SetTextBoxReadOnly(runTimesInput, false);
                 SetTextBoxReadOnly(waitTimeInput, false);
+                RestoreSleep();
             }
         }
 
@@ -484,6 +502,7 @@ namespace Komunikation_test
                 waitTimeInput.ReadOnly = true;
 
                 testing = true;
+                PreventSleep();
                 SendData(111111);
             }
         }
@@ -507,6 +526,7 @@ namespace Komunikation_test
                 AddItemToListBox("!");
                 rbtnLoggerOn.Checked = false;
                 SendData(111111);
+                PreventSleep();
             }
         }
 
