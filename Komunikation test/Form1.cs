@@ -69,6 +69,9 @@ namespace Komunikation_test
             btnContinue.Enabled = false;
             btnChangeSavePlace.Enabled = false;
             rbtnLoggerOn.Enabled = false;
+            SetButtonEnabled(btnCalibrateLoadcell, false);
+            SetButtonEnabled(btnCalibrateLoadcellNoLoad, false);
+            SetButtonEnabled(btnCalibrateLoadcellKnownLoad, false);
         }
 
         //Turns off sleep mode on computer
@@ -305,6 +308,7 @@ namespace Komunikation_test
                 SetTextBoxReadOnly(kinetcEnergyInput, false);
                 SetTextBoxReadOnly(runTimesInput, false);
                 SetTextBoxReadOnly(waitTimeInput, false);
+                SetButtonEnabled(btnCalibrateLoadcell, true);
                 RestoreSleep();
             }
         }
@@ -419,6 +423,7 @@ namespace Komunikation_test
                     btnDisconnect.Enabled = true;
                     btnRunTestOneTime.Enabled = true;
                     btnChangeSavePlace.Enabled = true;
+                    SetButtonEnabled(btnCalibrateLoadcell, true);
                 }
                 else { MessageBox.Show("Serial port is already open."); }
 
@@ -440,6 +445,7 @@ namespace Komunikation_test
                     btnDisconnect.Enabled = false;
                     btnRunTest.Enabled = false;
                     btnRunTestOneTime.Enabled = false;
+                    SetButtonEnabled(btnCalibrateLoadcell, false);
                 }
                 else { MessageBox.Show("Serial port is already closed."); }
 
@@ -494,6 +500,7 @@ namespace Komunikation_test
                 btnDisconnect.Enabled = false;
                 btnLoadPorts.Enabled = false;
                 btnChangeSavePlace.Enabled = false;
+                SetButtonEnabled(btnCalibrateLoadcell, false);
 
                 forceLimitInput.ReadOnly = true;
                 currentLimitInput.ReadOnly = true;
@@ -521,6 +528,7 @@ namespace Komunikation_test
                 btnChangeSavePlace.Enabled = false;
                 btnDisconnect.Enabled = false;
                 btnLoadPorts.Enabled = false;
+                SetButtonEnabled(btnCalibrateLoadcell, false);
                 testing = true;
                 timesToRun = 0;
                 AddItemToListBox("!");
@@ -579,6 +587,29 @@ namespace Komunikation_test
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCalibrateLoadcell_Click(object sender, EventArgs e)
+        {
+            SetButtonEnabled(btnRunTestOneTime, false);
+            SetButtonEnabled(btnRunTest, false);
+            SetButtonEnabled(btnCalibrateLoadcell, false);
+            SetButtonEnabled(btnCalibrateLoadcellNoLoad, true);
+
+        }
+
+        private void btnCalibrateLoadcellNoLoad_Click(object sender, EventArgs e)
+        {
+            SetButtonEnabled(btnCalibrateLoadcellNoLoad, false);
+            SetButtonEnabled(btnCalibrateLoadcellKnownLoad, true);
+        }
+
+        private void btnCalibrateLoadcellKnownLoad_Click(object sender, EventArgs e)
+        {
+            SetButtonEnabled(btnCalibrateLoadcellKnownLoad, false);
+            SetButtonEnabled(btnCalibrateLoadcell, true);
+            SetButtonEnabled(btnRunTestOneTime, true);
+            if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
         }
     }
 }

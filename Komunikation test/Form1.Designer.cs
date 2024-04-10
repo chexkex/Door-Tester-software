@@ -63,6 +63,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnCalibrateLoadcell = new System.Windows.Forms.Button();
+            this.btnCalibrateLoadcellNoLoad = new System.Windows.Forms.Button();
+            this.btnCalibrateLoadcellKnownLoad = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -389,11 +393,52 @@
             this.label9.TabIndex = 41;
             this.label9.Text = "Data info";
             // 
+            // btnCalibrateLoadcell
+            // 
+            this.btnCalibrateLoadcell.Location = new System.Drawing.Point(1673, 541);
+            this.btnCalibrateLoadcell.Name = "btnCalibrateLoadcell";
+            this.btnCalibrateLoadcell.Size = new System.Drawing.Size(150, 77);
+            this.btnCalibrateLoadcell.TabIndex = 42;
+            this.btnCalibrateLoadcell.Text = "Calibrate loadcell";
+            this.btnCalibrateLoadcell.UseVisualStyleBackColor = true;
+            this.btnCalibrateLoadcell.Click += new System.EventHandler(this.btnCalibrateLoadcell_Click);
+            // 
+            // btnCalibrateLoadcellNoLoad
+            // 
+            this.btnCalibrateLoadcellNoLoad.Location = new System.Drawing.Point(1673, 635);
+            this.btnCalibrateLoadcellNoLoad.Name = "btnCalibrateLoadcellNoLoad";
+            this.btnCalibrateLoadcellNoLoad.Size = new System.Drawing.Size(150, 77);
+            this.btnCalibrateLoadcellNoLoad.TabIndex = 43;
+            this.btnCalibrateLoadcellNoLoad.Text = "Calibrate no load";
+            this.btnCalibrateLoadcellNoLoad.UseVisualStyleBackColor = true;
+            this.btnCalibrateLoadcellNoLoad.Click += new System.EventHandler(this.btnCalibrateLoadcellNoLoad_Click);
+            // 
+            // btnCalibrateLoadcellKnownLoad
+            // 
+            this.btnCalibrateLoadcellKnownLoad.Location = new System.Drawing.Point(1673, 731);
+            this.btnCalibrateLoadcellKnownLoad.Name = "btnCalibrateLoadcellKnownLoad";
+            this.btnCalibrateLoadcellKnownLoad.Size = new System.Drawing.Size(150, 77);
+            this.btnCalibrateLoadcellKnownLoad.TabIndex = 44;
+            this.btnCalibrateLoadcellKnownLoad.Text = "Calibrate known load";
+            this.btnCalibrateLoadcellKnownLoad.UseVisualStyleBackColor = true;
+            this.btnCalibrateLoadcellKnownLoad.Click += new System.EventHandler(this.btnCalibrateLoadcellKnownLoad_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(1829, 756);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(129, 26);
+            this.textBox1.TabIndex = 45;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2124, 1090);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnCalibrateLoadcellKnownLoad);
+            this.Controls.Add(this.btnCalibrateLoadcellNoLoad);
+            this.Controls.Add(this.btnCalibrateLoadcell);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -475,6 +520,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnCalibrateLoadcell;
+        private System.Windows.Forms.Button btnCalibrateLoadcellNoLoad;
+        private System.Windows.Forms.Button btnCalibrateLoadcellKnownLoad;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
