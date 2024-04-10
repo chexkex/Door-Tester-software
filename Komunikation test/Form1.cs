@@ -37,6 +37,7 @@ namespace Komunikation_test
         bool btnPrintCurrentcon = false;
         bool printConDataonce = false;
         bool calibrateLoadcell = false;
+        bool totalPulseToLong = false;
 
 
         //Limit variables
@@ -57,6 +58,8 @@ namespace Komunikation_test
         int hallTotalReturn = 0;
         int hallDiffReturn = 0;
         int speedReturn = 0;
+        int totalPulse = 0;
+        int totalPulseLong = 0;
 
 
         public Form1()
@@ -199,6 +202,13 @@ namespace Komunikation_test
 
                         timesToRun--;
                         //inATest = false;
+                        if (totalPulseToLong)
+                        {
+                            totalPulseToLong = false;
+                            hallTotalReturn = (totalPulse * 10) + totalPulseLong;
+                        }
+                        else { totalPulse = hallTotalReturn;}
+                        AddItemToListBox(hallTotalReturn.ToString() + " Total steps");
 
                         if (rbtnLoggerOn.Checked)
                         {   
@@ -278,14 +288,8 @@ namespace Komunikation_test
 
                     }
 
-                    if (receivedNumber > 159999 && receivedNumber < 170000)
-                    {
-
-                        hallTotalReturn = receivedNumber % 10000;
-                        AddItemToListBox(hallTotalReturn.ToString() + " Total steps");
-
-                    }
-
+                    if (receivedNumber > 159999 && receivedNumber < 170000) { totalPulse = receivedNumber % 10000; }
+                    
                     if (receivedNumber > 169999 && receivedNumber < 180000)
                     {
 
@@ -302,6 +306,9 @@ namespace Komunikation_test
                         AddItemToListBox(speedReturn.ToString() + " Maxmimum pulse in 100ms");
 
                     }
+
+                    if (receivedNumber > 209999 && receivedNumber < 220000) { totalPulseLong = receivedNumber % 10000; if (totalPulseLong > 0) { totalPulseToLong = true; } }
+                    
 
                 }
                 else if ((btnPrintCurrentcon || btnPrintFrocecon) && printConDataonce) 
