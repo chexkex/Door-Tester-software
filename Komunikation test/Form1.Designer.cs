@@ -69,6 +69,7 @@
             this.knownLoadInput = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btnPrintFroceContinuously = new System.Windows.Forms.Button();
+            this.btnPrintCurrentContinuously = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -329,8 +330,7 @@
             // 
             this.motorTypeCombobox.FormattingEnabled = true;
             this.motorTypeCombobox.Items.AddRange(new object[] {
-            "1",
-            "2"});
+            "Cido"});
             this.motorTypeCombobox.Location = new System.Drawing.Point(1517, 102);
             this.motorTypeCombobox.Name = "motorTypeCombobox";
             this.motorTypeCombobox.Size = new System.Drawing.Size(170, 28);
@@ -451,11 +451,22 @@
             this.btnPrintFroceContinuously.UseVisualStyleBackColor = true;
             this.btnPrintFroceContinuously.Click += new System.EventHandler(this.btnPrintFroceContinuously_Click);
             // 
+            // btnPrintCurrentContinuously
+            // 
+            this.btnPrintCurrentContinuously.Location = new System.Drawing.Point(1499, 828);
+            this.btnPrintCurrentContinuously.Name = "btnPrintCurrentContinuously";
+            this.btnPrintCurrentContinuously.Size = new System.Drawing.Size(150, 77);
+            this.btnPrintCurrentContinuously.TabIndex = 48;
+            this.btnPrintCurrentContinuously.Text = "Print current continuously";
+            this.btnPrintCurrentContinuously.UseVisualStyleBackColor = true;
+            this.btnPrintCurrentContinuously.Click += new System.EventHandler(this.btnPrintCurrentContinuously_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2124, 1090);
+            this.Controls.Add(this.btnPrintCurrentContinuously);
             this.Controls.Add(this.btnPrintFroceContinuously);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.knownLoadInput);
@@ -549,6 +560,7 @@
         private System.Windows.Forms.TextBox knownLoadInput;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnPrintFroceContinuously;
+        private System.Windows.Forms.Button btnPrintCurrentContinuously;
     }
 }
 

@@ -33,6 +33,10 @@ namespace Komunikation_test
         bool firstTest = true;
         bool errorOcurred = false;
         bool oneTimeCall = false;
+        bool btnPrintFrocecon = false;
+        bool btnPrintCurrentcon = false;
+        bool printConDataonce = false;
+        bool calibrateLoadcell = false;
 
 
         //Limit variables
@@ -74,7 +78,10 @@ namespace Komunikation_test
             SetButtonEnabled(btnCalibrateLoadcell, false);
             SetButtonEnabled(btnCalibrateLoadcellNoLoad, false);
             SetButtonEnabled(btnCalibrateLoadcellKnownLoad, false);
+            SetButtonEnabled(btnPrintFroceContinuously, false);
+            SetButtonEnabled(btnPrintCurrentContinuously, false);
             SetTextBoxReadOnly(knownLoadInput, true);
+            
         }
 
         //Turns off sleep mode on computer
@@ -123,6 +130,7 @@ namespace Komunikation_test
             firstTest = true;
 
             DataIn(data);
+            if(btnPrintFrocecon || btnPrintCurrentcon) { printConDataonce = true; }
         }
 
         //DataIn uppdates the console and controles data
@@ -159,8 +167,19 @@ namespace Komunikation_test
                     SetButtonEnabled(btnCalibrateLoadcellKnownLoad, true); 
                     SetTextBoxReadOnly(knownLoadInput, false);
                     oneTimeCall = false;
+                   
                 }
-                if (receivedNumber == 411116 && oneTimeCall) { MessageBox.Show("Calibration is completed!"); SendData(420000 + (knownLoad * 10)); oneTimeCall = false; }
+                if (receivedNumber == 411116 && oneTimeCall) { 
+                    MessageBox.Show("Calibration is completed!"); 
+                    SendData(420000 + (knownLoad * 10)); 
+                    oneTimeCall = false;
+                    SetButtonEnabled(btnCalibrateLoadcellKnownLoad, false);
+                    SetButtonEnabled(btnCalibrateLoadcell, true);
+                    SetButtonEnabled(btnRunTestOneTime, true);
+                    SetButtonEnabled(btnPrintCurrentContinuously, true);
+                    SetButtonEnabled(btnPrintFroceContinuously, true);
+                    if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
+                }
 
                 //Is test is runing
                 if (testing && firstTest)
@@ -207,7 +226,7 @@ namespace Komunikation_test
                             if (currentReturn2 > currentLimit) { MessageBox.Show("Current has exceeded its limit value on current sensor 2. Press continue to run again"); errorOcurred = true; }
                             if (currentReturn3 > currentLimit) { MessageBox.Show("Current has exceeded its limit value on current sensor 3. Press continue to run again");  errorOcurred = true; }
                             if (calculatedKineticEnergy > kineticEnergyLimit) { MessageBox.Show("The kinetic energi has exceeded its limit value. Press continue to run again"); errorOcurred = true; }
-                            if (errorOcurred) { SetButtonEnabled(btnContinue, true); }
+                            if (errorOcurred) { SetButtonEnabled(btnContinue, true); errorOcurred = false; }
                             else { RunNextTest(); }
 
                         }
@@ -285,12 +304,32 @@ namespace Komunikation_test
                     }
 
                 }
-                else if (receivedNumber > 119999 && receivedNumber < 130000)
+                else if ((btnPrintCurrentcon || btnPrintFrocecon) && printConDataonce) 
                 {
-                    AddItemToListBox("!");
-                    int remainingNumber = receivedNumber % 10000;
-                    forceReturn = remainingNumber / 10.0f;
-                    AddItemToListBox(forceReturn.ToString() + " N");
+                    printConDataonce = false;
+                    if (receivedNumber > 119999 && receivedNumber < 130000) {
+                        int remainingNumber = receivedNumber % 10000;
+                        forceReturn = remainingNumber / 10.0f;
+                        AddItemToListBox(forceReturn.ToString() + " N");
+                    }
+                    if (receivedNumber > 129999 && receivedNumber < 140000)
+                    {
+                        currentReturn1 = receivedNumber % 10000;
+                        AddItemToListBox(currentReturn1.ToString() + " mA, Maximum current sensor 1");
+                    }
+
+                    if (receivedNumber > 139999 && receivedNumber < 150000)
+                    {
+                        currentReturn2 = receivedNumber % 10000;
+                        AddItemToListBox(currentReturn2.ToString() + " mA, Maximum current sensor 2");
+                    }
+
+                    if (receivedNumber > 149999 && receivedNumber < 160000)
+                    {
+                        currentReturn3 = receivedNumber % 10000;
+                        AddItemToListBox(currentReturn3.ToString() + " mA, Maximum current sensor 3");
+                        
+                    }
                 }
 
                 if (consoleBox.InvokeRequired) { consoleBox.Invoke(new Action<String>(DataIn), data); }
@@ -327,6 +366,8 @@ namespace Komunikation_test
                 SetTextBoxReadOnly(runTimesInput, false);
                 SetTextBoxReadOnly(waitTimeInput, false);
                 SetButtonEnabled(btnCalibrateLoadcell, true);
+                SetButtonEnabled(btnPrintFroceContinuously, true);
+                SetButtonEnabled(btnPrintCurrentContinuously, true);
                 RestoreSleep();
             }
         }
@@ -341,7 +382,7 @@ namespace Komunikation_test
             {
                 if (item == "!") { returnDataBox.Items.Clear(); }
 
-                else { returnDataBox.Items.Add(item); }
+                else { returnDataBox.Items.Add(item); returnDataBox.SelectedIndex = returnDataBox.Items.Count - 1; }
 
             }
         }
@@ -442,6 +483,8 @@ namespace Komunikation_test
                     btnRunTestOneTime.Enabled = true;
                     btnChangeSavePlace.Enabled = true;
                     SetButtonEnabled(btnCalibrateLoadcell, true);
+                    SetButtonEnabled(btnPrintFroceContinuously, true);
+                    SetButtonEnabled(btnPrintCurrentContinuously, true);
                 }
                 else { MessageBox.Show("Serial port is already open."); }
 
@@ -464,6 +507,8 @@ namespace Komunikation_test
                     btnRunTest.Enabled = false;
                     btnRunTestOneTime.Enabled = false;
                     SetButtonEnabled(btnCalibrateLoadcell, false);
+                    SetButtonEnabled(btnPrintFroceContinuously, false);
+                    SetButtonEnabled(btnPrintCurrentContinuously, false);
                 }
                 else { MessageBox.Show("Serial port is already closed."); }
 
@@ -519,6 +564,8 @@ namespace Komunikation_test
                 btnLoadPorts.Enabled = false;
                 btnChangeSavePlace.Enabled = false;
                 SetButtonEnabled(btnCalibrateLoadcell, false);
+                SetButtonEnabled(btnPrintFroceContinuously, false);
+                SetButtonEnabled(btnPrintCurrentContinuously, false);
 
                 forceLimitInput.ReadOnly = true;
                 currentLimitInput.ReadOnly = true;
@@ -547,6 +594,8 @@ namespace Komunikation_test
                 btnDisconnect.Enabled = false;
                 btnLoadPorts.Enabled = false;
                 SetButtonEnabled(btnCalibrateLoadcell, false);
+                SetButtonEnabled(btnPrintFroceContinuously, false);
+                SetButtonEnabled(btnPrintCurrentContinuously, false);
                 testing = true;
                 timesToRun = 0;
                 AddItemToListBox("!");
@@ -609,12 +658,26 @@ namespace Komunikation_test
 
         private void btnCalibrateLoadcell_Click(object sender, EventArgs e)
         {
-            SetButtonEnabled(btnRunTestOneTime, false);
-            SetButtonEnabled(btnRunTest, false);
-            SetButtonEnabled(btnCalibrateLoadcell, false);
-            SetButtonEnabled(btnCalibrateLoadcellNoLoad, true);
+            calibrateLoadcell = !calibrateLoadcell;
+            if (calibrateLoadcell)
+            {
+                btnCalibrateLoadcell.Text = "Stop calibrate loadcell";
+                SetButtonEnabled(btnRunTestOneTime, false);
+                SetButtonEnabled(btnRunTest, false);
+                SetButtonEnabled(btnCalibrateLoadcellNoLoad, true);
+                SetButtonEnabled(btnPrintCurrentContinuously, false);
+                SetButtonEnabled(btnPrintFroceContinuously, false);
+            }
+            else
+            {
+                btnCalibrateLoadcell.Text = "Calibrate loadcell";
+                SetButtonEnabled(btnRunTestOneTime, true);
+                SetButtonEnabled(btnRunTest, true);
+                SetButtonEnabled(btnCalibrateLoadcellNoLoad, false);
+                SetButtonEnabled(btnPrintCurrentContinuously, true);
+                SetButtonEnabled(btnPrintFroceContinuously, true);
+            }
             SendData(411111);
-
         }
 
         private void btnCalibrateLoadcellNoLoad_Click(object sender, EventArgs e)
@@ -622,8 +685,7 @@ namespace Komunikation_test
             oneTimeCall = true;
             SetButtonEnabled(btnCalibrateLoadcellNoLoad, false);
             SendData(411113);
-            
-
+            MessageBox.Show("Wait for calibration");
         }
 
         private void btnCalibrateLoadcellKnownLoad_Click(object sender, EventArgs e)
@@ -633,12 +695,9 @@ namespace Komunikation_test
             else {
                 oneTimeCall = true;
                 knownLoadInput.Text = "";
-                SetButtonEnabled(btnCalibrateLoadcellKnownLoad, false);
-                SetButtonEnabled(btnCalibrateLoadcell, true);
-                SetButtonEnabled(btnRunTestOneTime, true);
-                if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
                 SetTextBoxReadOnly(knownLoadInput, true);
                 SendData(411114);
+                MessageBox.Show("Wait for calibration");
             }
             
             
@@ -646,7 +705,43 @@ namespace Komunikation_test
 
         private void btnPrintFroceContinuously_Click(object sender, EventArgs e)
         {
+            btnPrintFrocecon = !btnPrintFrocecon;
+            if (btnPrintFrocecon) { 
+                btnPrintFroceContinuously.Text = "Stop print force continuously";
+                SetButtonEnabled(btnRunTestOneTime, false);
+                SetButtonEnabled(btnRunTest, false);
+                SetButtonEnabled(btnCalibrateLoadcell, false);
+            }
+            else { 
+                btnPrintFroceContinuously.Text = "Print force continuously";
+                SetButtonEnabled(btnRunTestOneTime, true);
+                if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
+                SetButtonEnabled(btnCalibrateLoadcell, true);
+            }
+            
             SendData(411112);
+        }
+
+        private void btnPrintCurrentContinuously_Click(object sender, EventArgs e)
+        {
+            btnPrintCurrentcon = !btnPrintCurrentcon;
+            if (btnPrintCurrentcon)
+            {
+                btnPrintCurrentContinuously.Text = "Stop print current continuously";
+                MessageBox.Show("Current sensor is set to 0");
+                SetButtonEnabled(btnRunTestOneTime, false);
+                SetButtonEnabled(btnRunTest, false);
+                SetButtonEnabled(btnCalibrateLoadcell, false);
+            }
+            else
+            {
+                btnPrintCurrentContinuously.Text = "Print current continuously";
+                SetButtonEnabled(btnRunTestOneTime, true);
+                if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
+                SetButtonEnabled(btnCalibrateLoadcell, true);
+            }
+
+            SendData(411121);
         }
     }
 }
