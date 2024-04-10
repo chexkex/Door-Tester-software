@@ -66,7 +66,9 @@
             this.btnCalibrateLoadcell = new System.Windows.Forms.Button();
             this.btnCalibrateLoadcellNoLoad = new System.Windows.Forms.Button();
             this.btnCalibrateLoadcellKnownLoad = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.knownLoadInput = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnPrintFroceContinuously = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -423,19 +425,40 @@
             this.btnCalibrateLoadcellKnownLoad.UseVisualStyleBackColor = true;
             this.btnCalibrateLoadcellKnownLoad.Click += new System.EventHandler(this.btnCalibrateLoadcellKnownLoad_Click);
             // 
-            // textBox1
+            // knownLoadInput
             // 
-            this.textBox1.Location = new System.Drawing.Point(1829, 756);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(129, 26);
-            this.textBox1.TabIndex = 45;
+            this.knownLoadInput.Location = new System.Drawing.Point(1829, 756);
+            this.knownLoadInput.Name = "knownLoadInput";
+            this.knownLoadInput.Size = new System.Drawing.Size(129, 26);
+            this.knownLoadInput.TabIndex = 45;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(1829, 731);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(116, 20);
+            this.label10.TabIndex = 46;
+            this.label10.Text = "Known load (N)";
+            // 
+            // btnPrintFroceContinuously
+            // 
+            this.btnPrintFroceContinuously.Location = new System.Drawing.Point(1673, 828);
+            this.btnPrintFroceContinuously.Name = "btnPrintFroceContinuously";
+            this.btnPrintFroceContinuously.Size = new System.Drawing.Size(150, 77);
+            this.btnPrintFroceContinuously.TabIndex = 47;
+            this.btnPrintFroceContinuously.Text = "Print force continuously";
+            this.btnPrintFroceContinuously.UseVisualStyleBackColor = true;
+            this.btnPrintFroceContinuously.Click += new System.EventHandler(this.btnPrintFroceContinuously_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2124, 1090);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnPrintFroceContinuously);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.knownLoadInput);
             this.Controls.Add(this.btnCalibrateLoadcellKnownLoad);
             this.Controls.Add(this.btnCalibrateLoadcellNoLoad);
             this.Controls.Add(this.btnCalibrateLoadcell);
@@ -523,7 +546,9 @@
         private System.Windows.Forms.Button btnCalibrateLoadcell;
         private System.Windows.Forms.Button btnCalibrateLoadcellNoLoad;
         private System.Windows.Forms.Button btnCalibrateLoadcellKnownLoad;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox knownLoadInput;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnPrintFroceContinuously;
     }
 }
 

@@ -32,6 +32,7 @@ namespace Komunikation_test
         //bool inATest = false;
         bool firstTest = true;
         bool errorOcurred = false;
+        bool oneTimeCall = false;
 
 
         //Limit variables
@@ -42,6 +43,7 @@ namespace Komunikation_test
         int timesRuned = 1;
         int waitTime = 0;
         float calculatedKineticEnergy = 0;
+        int knownLoad = 0;
         
 
         float forceReturn = 0;
@@ -72,6 +74,7 @@ namespace Komunikation_test
             SetButtonEnabled(btnCalibrateLoadcell, false);
             SetButtonEnabled(btnCalibrateLoadcellNoLoad, false);
             SetButtonEnabled(btnCalibrateLoadcellKnownLoad, false);
+            SetTextBoxReadOnly(knownLoadInput, true);
         }
 
         //Turns off sleep mode on computer
@@ -150,6 +153,14 @@ namespace Komunikation_test
                 }
 
                 if (data.Trim().Equals("1111217")) { SendData(lastDataSent); }
+
+                if (receivedNumber == 411115 && oneTimeCall) {
+                    MessageBox.Show("Calibration whid no load is completed! Calibrat whid known load now.");
+                    SetButtonEnabled(btnCalibrateLoadcellKnownLoad, true); 
+                    SetTextBoxReadOnly(knownLoadInput, false);
+                    oneTimeCall = false;
+                }
+                if (receivedNumber == 411116 && oneTimeCall) { MessageBox.Show("Calibration is completed!"); SendData(420000 + (knownLoad * 10)); oneTimeCall = false; }
 
                 //Is test is runing
                 if (testing && firstTest)
@@ -267,12 +278,19 @@ namespace Komunikation_test
 
                     if (receivedNumber > 179999 && receivedNumber < 190000)
                     {
-
+                        
                         speedReturn = receivedNumber % 10000;
                         AddItemToListBox(speedReturn.ToString() + " Maxmimum pulse in 100ms");
 
                     }
 
+                }
+                else if (receivedNumber > 119999 && receivedNumber < 130000)
+                {
+                    AddItemToListBox("!");
+                    int remainingNumber = receivedNumber % 10000;
+                    forceReturn = remainingNumber / 10.0f;
+                    AddItemToListBox(forceReturn.ToString() + " N");
                 }
 
                 if (consoleBox.InvokeRequired) { consoleBox.Invoke(new Action<String>(DataIn), data); }
@@ -595,21 +613,40 @@ namespace Komunikation_test
             SetButtonEnabled(btnRunTest, false);
             SetButtonEnabled(btnCalibrateLoadcell, false);
             SetButtonEnabled(btnCalibrateLoadcellNoLoad, true);
+            SendData(411111);
 
         }
 
         private void btnCalibrateLoadcellNoLoad_Click(object sender, EventArgs e)
         {
+            oneTimeCall = true;
             SetButtonEnabled(btnCalibrateLoadcellNoLoad, false);
-            SetButtonEnabled(btnCalibrateLoadcellKnownLoad, true);
+            SendData(411113);
+            
+
         }
 
         private void btnCalibrateLoadcellKnownLoad_Click(object sender, EventArgs e)
         {
-            SetButtonEnabled(btnCalibrateLoadcellKnownLoad, false);
-            SetButtonEnabled(btnCalibrateLoadcell, true);
-            SetButtonEnabled(btnRunTestOneTime, true);
-            if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
+            knownLoad = IntConvet(knownLoadInput.Text.Trim());
+            if (knownLoad == 0) { MessageBox.Show("Known load i missing"); }
+            else {
+                oneTimeCall = true;
+                knownLoadInput.Text = "";
+                SetButtonEnabled(btnCalibrateLoadcellKnownLoad, false);
+                SetButtonEnabled(btnCalibrateLoadcell, true);
+                SetButtonEnabled(btnRunTestOneTime, true);
+                if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
+                SetTextBoxReadOnly(knownLoadInput, true);
+                SendData(411114);
+            }
+            
+            
+        }
+
+        private void btnPrintFroceContinuously_Click(object sender, EventArgs e)
+        {
+            SendData(411112);
         }
     }
 }
