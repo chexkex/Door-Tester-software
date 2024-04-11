@@ -198,18 +198,18 @@ namespace Komunikation_test
 
                     if (receivedNumber == 111116) {
 
-                        if (timesToRun > 0) { AddItemToListBox("Ready for new run, Waiting for timer"); }
-
-                        timesToRun--;
-                        //inATest = false;
                         if (totalPulseToLong)
                         {
                             totalPulseToLong = false;
                             hallTotalReturn = (totalPulse * 10) + totalPulseLong;
                         }
-                        else { totalPulse = hallTotalReturn;}
+                        else { hallTotalReturn = totalPulse; }
                         AddItemToListBox(hallTotalReturn.ToString() + " Total steps");
 
+                        if (timesToRun > 0) { AddItemToListBox("Ready for new run, Waiting for timer"); }
+
+                        timesToRun--;
+                        
                         if (rbtnLoggerOn.Checked)
                         {   
                             //Saving data to file
