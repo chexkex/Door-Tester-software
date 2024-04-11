@@ -638,7 +638,7 @@ namespace Komunikation_test
                     filePath = Path.Combine(selectedFolderPath, selectedFileName);
 
                     lblSelectedFolder.Text = "Selected filename: " + selectedFileName;
-                    if (serialPort.IsOpen) { btnRunTest.Enabled = true; }                    
+                    if (serialPort.IsOpen && btnPrintCurrentcon && btnPrintFrocecon) { btnRunTest.Enabled = true; }                    
                 }
                 else { lblSelectedFolder.Text = "No folder or file selected."; }
             }
@@ -693,6 +693,7 @@ namespace Komunikation_test
             SetButtonEnabled(btnCalibrateLoadcellNoLoad, false);
             SendData(411113);
             MessageBox.Show("Wait for calibration");
+            SetButtonEnabled(btnCalibrateLoadcell, false);
         }
 
         private void btnCalibrateLoadcellKnownLoad_Click(object sender, EventArgs e)
@@ -705,6 +706,8 @@ namespace Komunikation_test
                 SetTextBoxReadOnly(knownLoadInput, true);
                 SendData(411114);
                 MessageBox.Show("Wait for calibration");
+                btnCalibrateLoadcell.Text = "Calibrate loadcell";
+                SetTextBoxReadOnly(knownLoadInput, true);
             }
             
             
