@@ -184,7 +184,7 @@ namespace Komunikation_test
             if (forceLimit == 0 || currentLimit == 0 || kineticEnergyLimit == 0 || timesToRun == 0 || waitTime == 0) { MessageBox.Show("Limit values are missing"); }
             else if (string.IsNullOrEmpty(selectedDoorLenght)) { MessageBox.Show("Dorr leght is missing"); }
             else if (string.IsNullOrEmpty(selectedDoorMotor)) { MessageBox.Show("Motor type is missing"); }
-            else if (string.IsNullOrEmpty(currentChannels)) { MessageBox.Show("Current channels is missing"); }
+            else if (string.IsNullOrEmpty(currentChannels)) { MessageBox.Show("Current channels is missing");  }
             
             //else the test begins
             else
