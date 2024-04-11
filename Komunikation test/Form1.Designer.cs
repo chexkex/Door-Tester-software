@@ -443,6 +443,7 @@
             // 
             // btnPrintFroceContinuously
             // 
+            this.btnPrintFroceContinuously.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnPrintFroceContinuously.Location = new System.Drawing.Point(1673, 828);
             this.btnPrintFroceContinuously.Name = "btnPrintFroceContinuously";
             this.btnPrintFroceContinuously.Size = new System.Drawing.Size(150, 77);
