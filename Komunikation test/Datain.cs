@@ -68,9 +68,9 @@ namespace Komunikation_test
                     if (totalPulseToLong)
                     {
                         totalPulseToLong = false;
-                        TotalPulseOneOpening = (totalPulse * 10) + totalPulseLong;
+                        TotalPulseOneOpening = ((totalPulse * 10) + totalPulseLong) / 2;
                     }
-                    else { TotalPulseOneOpening = totalPulse; }
+                    else { TotalPulseOneOpening = totalPulse / 2; }
                 }
 
                 //Is test is runing
@@ -197,8 +197,17 @@ namespace Komunikation_test
 
                         int recivedSpeed = receivedNumber % 10000;
                         float recivedSpeedF = (float)recivedSpeed / 100;
-                        if (doorType == "Hinged door") {
-                            AddItemToListBox(speedReturn.ToString() + " Maxmimum pulse in 100ms");
+                        if (doorType == "Hinged door")
+                        {
+                            float distance90Degrees = (float)((doorLenght * 2 * 3.141592) / 4);
+                            float distanceOn10Pulses = (distance90Degrees / TotalPulseOneOpening) * 10;
+                            speedReturn = (int)(distanceOn10Pulses / (recivedSpeedF / 1000));
+                            AddItemToListBox(speedReturn.ToString() + " mm/s, Maxmimum speed");
+                        }
+                        else if (doorType == "Sliding door") {
+                            float distanceOn10Pulses = (float)(doorLenght / TotalPulseOneOpening) * 10;
+                            speedReturn = (int)(distanceOn10Pulses / (recivedSpeedF / 1000));
+                            AddItemToListBox(speedReturn.ToString() + " mm/s, Maxmimum speed");
                         }
                         
 

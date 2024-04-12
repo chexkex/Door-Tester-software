@@ -64,6 +64,7 @@ namespace Komunikation_test
         int speedReturn = 0;
         int totalPulse = 0;
         int totalPulseLong = 0;
+        
 
 
         public Form1()
@@ -227,7 +228,7 @@ namespace Komunikation_test
             currentChannels = (ReadComboBox(currentChannelsCombobox));
 
             if (string.IsNullOrEmpty(currentChannels)) { MessageBox.Show("Current channels is missing"); }
-            //else if (doorIsCalibrated) { MessageBox.Show("Door is not calibrated"); }
+            else if (doorIsCalibrated) { MessageBox.Show("Door is not calibrated"); }
 
             else 
             {
@@ -419,6 +420,7 @@ namespace Komunikation_test
                 SetButtonEnabled(btnPrintCurrentContinuously, false);
                 SetButtonEnabled(btnPrintFroceContinuously, false);
                 doorIsInCalibration = true;
+                TotalPulseOneOpening = 0;
                 MessageBox.Show("Open the door manually and let it close");
                 SendData(411131);
             }
