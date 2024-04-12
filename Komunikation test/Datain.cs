@@ -121,17 +121,17 @@ namespace Komunikation_test
                             if (IntConvet(currentChannels) == 1)
                             {
                                 SaveDataToCSV(filePath, timesRuned.ToString(), forceReturn.ToString(), currentReturn1.ToString(), hallTotalReturn.ToString(),
-                             hallDiffReturn.ToString(), speedReturn.ToString());
+                             hallDiffReturn.ToString(), speedReturn.ToString(), Kineticenergy.ToString());
                             }
                             else if (IntConvet(currentChannels) == 2)
                             {
                                 SaveDataToCSV(filePath, timesRuned.ToString(), forceReturn.ToString(), currentReturn1.ToString(), currentReturn2.ToString(), hallTotalReturn.ToString(),
-                             hallDiffReturn.ToString(), speedReturn.ToString());
+                             hallDiffReturn.ToString(), speedReturn.ToString(), Kineticenergy.ToString());
                             }
                             else if (IntConvet(currentChannels) == 3)
                             {
                                 SaveDataToCSV(filePath, timesRuned.ToString(), forceReturn.ToString(), currentReturn1.ToString(), currentReturn2.ToString(), currentReturn3.ToString(), hallTotalReturn.ToString(),
-                             hallDiffReturn.ToString(), speedReturn.ToString());
+                             hallDiffReturn.ToString(), speedReturn.ToString(), Kineticenergy.ToString());
                             }
 
                             timesRuned++;
@@ -220,8 +220,16 @@ namespace Komunikation_test
                         }
                         else if (doorType == "Sliding door") {
                             float distanceOn10Pulses = (float)(doorLenght / TotalPulseOneOpening) * 10;
-                            speedReturn = (int)(distanceOn10Pulses / (recivedSpeedF / 1000));
+                            float tempSpeed = (distanceOn10Pulses / (recivedSpeedF / 1000));
+                            speedReturn = (int)tempSpeed;
+
+                            float tempSpeedSq = (tempSpeed / 1000) * (tempSpeed / 1000);
+                            float tempKinetic = (tempSpeedSq * (float)doorweight) / 2;
+                            Kineticenergy = (int)(tempKinetic * 1000);
+                            
+                            //Kineticenergy = (int)((0.5 * doorweight * (speedReturn / 1000) * (speedReturn / 1000)) * 1000);
                             AddItemToListBox(speedReturn.ToString() + " mm/s, Maxmimum speed");
+                            AddItemToListBox(Kineticenergy.ToString() + " mJ, Kinetic energy");
                         }
                         
 

@@ -64,6 +64,7 @@ namespace Komunikation_test
         int speedReturn = 0;
         int totalPulse = 0;
         int totalPulseLong = 0;
+        int Kineticenergy = 0;
         
 
 
@@ -190,16 +191,16 @@ namespace Komunikation_test
             currentChannels = ReadComboBox(currentChannelsCombobox);
 
             //controls input values and not run the test
-            if (forceLimit == 0 || currentLimit == 0 || kineticEnergyLimit == 0 || timesToRun == 0 || waitTime == 0 || forceLimit < 1000 || currentLimit < 6000 || timesToRun < 50000) { MessageBox.Show("Limit values are missing or out of range"); }
+            if (forceLimit == 0 || currentLimit == 0 || kineticEnergyLimit == 0 || timesToRun == 0 || waitTime == 0 || forceLimit > 1000 || currentLimit > 6000 || timesToRun > 50000) { MessageBox.Show("Limit values are missing or out of range"); }
             else if (string.IsNullOrEmpty(currentChannels)) { MessageBox.Show("Current channels is missing");  }
             else if (!doorIsCalibrated) { MessageBox.Show("Door is not calibrated"); }
             
             //else the test begins
             else
             {
-                if(IntConvet(currentChannels) == 1) { SaveDataToCSV(filePath, "Run times", "Max force", "Current 1", "Steps total", "Step diff", "Maximum speed"); }
-                else if (IntConvet(currentChannels) == 2) { SaveDataToCSV(filePath, "Run times", "Max force", "Current 1", "Current 2", "Steps total", "Step diff", "Maximum speed"); }
-                else if (IntConvet(currentChannels) == 3) { SaveDataToCSV(filePath, "Run times", "Max force", "Current 1", "Current 2", "Current 3", "Steps total", "Step diff", "Maximum speed"); }
+                if(IntConvet(currentChannels) == 1) { SaveDataToCSV(filePath, "Run times", "Max force", "Current 1", "Steps total", "Step diff", "Maximum speed mm/s", "Kinetic energy mJ"); }
+                else if (IntConvet(currentChannels) == 2) { SaveDataToCSV(filePath, "Run times", "Max force", "Current 1", "Current 2", "Steps total", "Step diff", "Maximum speed mm/s", "Kinetic energy mJ"); }
+                else if (IntConvet(currentChannels) == 3) { SaveDataToCSV(filePath, "Run times", "Max force", "Current 1", "Current 2", "Current 3", "Steps total", "Step diff", "Maximum speed mm/s", "Kinetic energy mJ"); }
                 btnRunTest.Enabled = false;
                 btnStopTest.Enabled = true;
                 btnRunTestOneTime.Enabled = false;
