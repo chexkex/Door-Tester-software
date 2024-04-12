@@ -91,6 +91,7 @@ namespace Komunikation_test
             SetTextBoxReadOnly(knownLoadInput, true);
             SetButtonEnabled(btnCalibrateDoor, false);
             SetButtonEnabled(btnStopCalibrateDoor, false);
+            SetButtonEnabled(btnRecalibrateDoor, false);
             
         }
 
@@ -191,7 +192,7 @@ namespace Komunikation_test
             //controls input values and not run the test
             if (forceLimit == 0 || currentLimit == 0 || kineticEnergyLimit == 0 || timesToRun == 0 || waitTime == 0) { MessageBox.Show("Limit values are missing"); }
             else if (string.IsNullOrEmpty(currentChannels)) { MessageBox.Show("Current channels is missing");  }
-            else if (doorIsCalibrated) { MessageBox.Show("Door is not calibrated"); }
+            else if (!doorIsCalibrated) { MessageBox.Show("Door is not calibrated"); }
             
             //else the test begins
             else
@@ -228,7 +229,7 @@ namespace Komunikation_test
             currentChannels = (ReadComboBox(currentChannelsCombobox));
 
             if (string.IsNullOrEmpty(currentChannels)) { MessageBox.Show("Current channels is missing"); }
-            else if (doorIsCalibrated) { MessageBox.Show("Door is not calibrated"); }
+            else if (!doorIsCalibrated) { MessageBox.Show("Door is not calibrated"); }
 
             else 
             {
@@ -421,8 +422,12 @@ namespace Komunikation_test
                 SetButtonEnabled(btnPrintFroceContinuously, false);
                 doorIsInCalibration = true;
                 TotalPulseOneOpening = 0;
-                MessageBox.Show("Open the door manually and let it close");
+                SetTextBoxReadOnly(doorLengthInput, true);
+                SetTextBoxReadOnly(doorWeightInput, true);
                 SendData(411131);
+                doorTypeComboBox.Enabled = false;
+                MessageBox.Show("Open the door manually and let it close.");
+                
             }
             
         }
@@ -430,15 +435,18 @@ namespace Komunikation_test
         private void btnStopCalibrateDoor_Click(object sender, EventArgs e)
         {
             SetButtonEnabled(btnStopCalibrateDoor, false);
-            SetButtonEnabled(btnCalibrateDoor, true);
-            SetButtonEnabled(btnRunTestOneTime, true);
-            if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
-            SetButtonEnabled(btnCalibrateLoadcell, true);
-            SetButtonEnabled(btnPrintCurrentContinuously, true);
-            SetButtonEnabled(btnPrintFroceContinuously, true);
             
             MessageBox.Show("Door i calibrated wait for data");
             SendData(411132);
+        }
+
+        private void btnRecalibrateDoor_Click(object sender, EventArgs e)
+        {
+            SetButtonEnabled(btnCalibrateDoor, true);
+            SetTextBoxReadOnly(doorWeightInput, false);
+            SetTextBoxReadOnly(doorLengthInput, false);
+            SetButtonEnabled(btnRecalibrateDoor, false);
+            doorTypeComboBox.Enabled = true;
         }
     }
 }

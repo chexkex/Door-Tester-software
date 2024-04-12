@@ -75,7 +75,14 @@ namespace Komunikation_test
                         else { TotalPulseOneOpening = totalPulse / 2; }
 
                         doorIsInCalibration = false; AddItemToListBox("!");  
-                        AddItemToListBox(TotalPulseOneOpening.ToString() + " One opening pulses"); 
+                        AddItemToListBox(TotalPulseOneOpening.ToString() + " One opening pulses");
+                        doorIsCalibrated = true;
+                        SetButtonEnabled(btnRunTestOneTime, true);
+                        if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
+                        SetButtonEnabled(btnCalibrateLoadcell, true);
+                        SetButtonEnabled(btnPrintCurrentContinuously, true);
+                        SetButtonEnabled(btnPrintFroceContinuously, true);
+                        SetButtonEnabled(btnRecalibrateDoor, true);
                     }
                     
                 }

@@ -34,6 +34,7 @@ namespace Komunikation_test
                 SetButtonEnabled(btnCalibrateLoadcell, true);
                 SetButtonEnabled(btnPrintFroceContinuously, true);
                 SetButtonEnabled(btnPrintCurrentContinuously, true);
+                SetButtonEnabled(btnCalibrateDoor, true);
                 RestoreSleep();
             }
         }
