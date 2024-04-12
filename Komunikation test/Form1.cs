@@ -437,9 +437,8 @@ namespace Komunikation_test
             SetButtonEnabled(btnPrintCurrentContinuously, true);
             SetButtonEnabled(btnPrintFroceContinuously, true);
             
-            doorIsInCalibration = false;
             MessageBox.Show("Door i calibrated wait for data");
-            SendData(411131);
+            SendData(411132);
         }
     }
 }

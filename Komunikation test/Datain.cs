@@ -65,12 +65,19 @@ namespace Komunikation_test
                     if (receivedNumber > 159999 && receivedNumber < 170000) { totalPulse = receivedNumber % 10000; }   
                     if (receivedNumber > 209999 && receivedNumber < 220000) { totalPulseLong = receivedNumber % 10000; if (totalPulseLong > 0) { totalPulseToLong = true; } }
                
-                    if (totalPulseToLong)
-                    {
-                        totalPulseToLong = false;
-                        TotalPulseOneOpening = ((totalPulse * 10) + totalPulseLong) / 2;
+                   
+                    if (receivedNumber == 111116) {
+                        if (totalPulseToLong)
+                        {
+                            totalPulseToLong = false;
+                            TotalPulseOneOpening = ((totalPulse * 10) + totalPulseLong) / 2;
+                        }
+                        else { TotalPulseOneOpening = totalPulse / 2; }
+
+                        doorIsInCalibration = false; AddItemToListBox("!");  
+                        AddItemToListBox(TotalPulseOneOpening.ToString() + " One opening pulses"); 
                     }
-                    else { TotalPulseOneOpening = totalPulse / 2; }
+                    
                 }
 
                 //Is test is runing
