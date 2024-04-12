@@ -24,8 +24,6 @@ namespace Komunikation_test
         string selectedFolderPath;
         string filePath;
 
-        string selectedDoorLenght;
-        string selectedDoorMotor;
         string currentChannels;
 
         bool testing = false;
@@ -38,6 +36,8 @@ namespace Komunikation_test
         bool printConDataonce = false;
         bool calibrateLoadcell = false;
         bool totalPulseToLong = false;
+        bool doorIsCalibrated = false;
+        bool doorIsInCalibration = false;
 
 
         //Limit variables
@@ -49,6 +49,10 @@ namespace Komunikation_test
         int waitTime = 0;
         float calculatedKineticEnergy = 0;
         int knownLoad = 0;
+        int doorLenght = 0;
+        int doorweight = 0;
+        int TotalPulseOneOpening = 0;
+        string doorType;
         
 
         float forceReturn = 0;
@@ -84,6 +88,8 @@ namespace Komunikation_test
             SetButtonEnabled(btnPrintFroceContinuously, false);
             SetButtonEnabled(btnPrintCurrentContinuously, false);
             SetTextBoxReadOnly(knownLoadInput, true);
+            SetButtonEnabled(btnCalibrateDoor, false);
+            SetButtonEnabled(btnStopCalibrateDoor, false);
             
         }
 
@@ -120,6 +126,7 @@ namespace Komunikation_test
                     SetButtonEnabled(btnCalibrateLoadcell, true);
                     SetButtonEnabled(btnPrintFroceContinuously, true);
                     SetButtonEnabled(btnPrintCurrentContinuously, true);
+                    SetButtonEnabled(btnCalibrateDoor, true);
                 }
                 else { MessageBox.Show("Serial port is already open."); }
 
@@ -176,15 +183,14 @@ namespace Komunikation_test
             waitTime = IntConvet(waitTimeInput.Text.Trim());
             AddItemToListBox("!");
 
-            selectedDoorLenght = ReadComboBox(doorLengthCombobox);
-            selectedDoorMotor = ReadComboBox(motorTypeCombobox);
+            
+            
             currentChannels = ReadComboBox(currentChannelsCombobox);
 
             //controls input values and not run the test
             if (forceLimit == 0 || currentLimit == 0 || kineticEnergyLimit == 0 || timesToRun == 0 || waitTime == 0) { MessageBox.Show("Limit values are missing"); }
-            else if (string.IsNullOrEmpty(selectedDoorLenght)) { MessageBox.Show("Dorr leght is missing"); }
-            else if (string.IsNullOrEmpty(selectedDoorMotor)) { MessageBox.Show("Motor type is missing"); }
             else if (string.IsNullOrEmpty(currentChannels)) { MessageBox.Show("Current channels is missing");  }
+            else if (doorIsCalibrated) { MessageBox.Show("Door is not calibrated"); }
             
             //else the test begins
             else
@@ -201,6 +207,7 @@ namespace Komunikation_test
                 SetButtonEnabled(btnCalibrateLoadcell, false);
                 SetButtonEnabled(btnPrintFroceContinuously, false);
                 SetButtonEnabled(btnPrintCurrentContinuously, false);
+                SetButtonEnabled(btnCalibrateDoor, false);
 
                 forceLimitInput.ReadOnly = true;
                 currentLimitInput.ReadOnly = true;
@@ -220,7 +227,8 @@ namespace Komunikation_test
             currentChannels = (ReadComboBox(currentChannelsCombobox));
 
             if (string.IsNullOrEmpty(currentChannels)) { MessageBox.Show("Current channels is missing"); }
-              
+            //else if (doorIsCalibrated) { MessageBox.Show("Door is not calibrated"); }
+
             else 
             {
                 btnRunTestOneTime.Enabled = false;
@@ -231,6 +239,7 @@ namespace Komunikation_test
                 SetButtonEnabled(btnCalibrateLoadcell, false);
                 SetButtonEnabled(btnPrintFroceContinuously, false);
                 SetButtonEnabled(btnPrintCurrentContinuously, false);
+                SetButtonEnabled(btnCalibrateDoor, false);
                 testing = true;
                 timesToRun = 0;
                 AddItemToListBox("!");
@@ -302,6 +311,7 @@ namespace Komunikation_test
                 SetButtonEnabled(btnCalibrateLoadcellNoLoad, true);
                 SetButtonEnabled(btnPrintCurrentContinuously, false);
                 SetButtonEnabled(btnPrintFroceContinuously, false);
+                SetButtonEnabled(btnCalibrateDoor, false);
             }
             else
             {
@@ -311,6 +321,7 @@ namespace Komunikation_test
                 SetButtonEnabled(btnCalibrateLoadcellNoLoad, false);
                 SetButtonEnabled(btnPrintCurrentContinuously, true);
                 SetButtonEnabled(btnPrintFroceContinuously, true);
+                SetButtonEnabled(btnCalibrateDoor, true);
             }
             SendData(411111);
         }
@@ -349,12 +360,14 @@ namespace Komunikation_test
                 SetButtonEnabled(btnRunTestOneTime, false);
                 SetButtonEnabled(btnRunTest, false);
                 SetButtonEnabled(btnCalibrateLoadcell, false);
+                SetButtonEnabled(btnCalibrateDoor, false);
             }
             else { 
                 btnPrintFroceContinuously.Text = "Print force continuously";
                 SetButtonEnabled(btnRunTestOneTime, true);
                 if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
                 SetButtonEnabled(btnCalibrateLoadcell, true);
+                SetButtonEnabled(btnCalibrateDoor, true);
             }
             
             SendData(411112);
@@ -370,6 +383,7 @@ namespace Komunikation_test
                 SetButtonEnabled(btnRunTestOneTime, false);
                 SetButtonEnabled(btnRunTest, false);
                 SetButtonEnabled(btnCalibrateLoadcell, false);
+                SetButtonEnabled(btnCalibrateDoor, false);
             }
             else
             {
@@ -377,9 +391,53 @@ namespace Komunikation_test
                 SetButtonEnabled(btnRunTestOneTime, true);
                 if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
                 SetButtonEnabled(btnCalibrateLoadcell, true);
+                SetButtonEnabled (btnCalibrateDoor, true);
             }
 
             SendData(411121);
+        }
+
+        private void btnCalibrateDoor_Click(object sender, EventArgs e)
+        {
+            doorLenght = IntConvet(doorLengthInput.Text.Trim());
+            doorweight = IntConvet(doorWeightInput.Text.Trim());
+            doorType = ReadComboBox(doorTypeComboBox);
+
+
+            if (doorweight == 0 || doorLenght == 0)
+            {
+                MessageBox.Show("Door information is missing!");
+            }
+            else if (string.IsNullOrEmpty(doorType)) { MessageBox.Show("Door type is missing!"); }
+            else
+            {
+                SetButtonEnabled(btnCalibrateDoor, false);
+                SetButtonEnabled(btnStopCalibrateDoor, true);
+                SetButtonEnabled(btnRunTestOneTime, false);
+                SetButtonEnabled(btnRunTest, false);
+                SetButtonEnabled(btnCalibrateLoadcell, false);
+                SetButtonEnabled(btnPrintCurrentContinuously, false);
+                SetButtonEnabled(btnPrintFroceContinuously, false);
+                doorIsInCalibration = true;
+                MessageBox.Show("Open the door manually and let it close");
+                SendData(411131);
+            }
+            
+        }
+
+        private void btnStopCalibrateDoor_Click(object sender, EventArgs e)
+        {
+            SetButtonEnabled(btnStopCalibrateDoor, false);
+            SetButtonEnabled(btnCalibrateDoor, true);
+            SetButtonEnabled(btnRunTestOneTime, true);
+            if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
+            SetButtonEnabled(btnCalibrateLoadcell, true);
+            SetButtonEnabled(btnPrintCurrentContinuously, true);
+            SetButtonEnabled(btnPrintFroceContinuously, true);
+            
+            doorIsInCalibration = false;
+            MessageBox.Show("Door i calibrated wait for data");
+            SendData(411131);
         }
     }
 }

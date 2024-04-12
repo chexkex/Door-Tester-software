@@ -59,6 +59,19 @@ namespace Komunikation_test
                     SetButtonEnabled(btnPrintFroceContinuously, true);
                     if (rbtnLoggerOn.Checked) { SetButtonEnabled(btnRunTest, true); }
                 }
+                //Calibrate door
+                if (doorIsInCalibration)
+                {
+                    if (receivedNumber > 159999 && receivedNumber < 170000) { totalPulse = receivedNumber % 10000; }   
+                    if (receivedNumber > 209999 && receivedNumber < 220000) { totalPulseLong = receivedNumber % 10000; if (totalPulseLong > 0) { totalPulseToLong = true; } }
+               
+                    if (totalPulseToLong)
+                    {
+                        totalPulseToLong = false;
+                        TotalPulseOneOpening = (totalPulse * 10) + totalPulseLong;
+                    }
+                    else { TotalPulseOneOpening = totalPulse; }
+                }
 
                 //Is test is runing
                 if (testing && firstTest)
@@ -182,8 +195,12 @@ namespace Komunikation_test
                     if (receivedNumber > 179999 && receivedNumber < 190000)
                     {
 
-                        speedReturn = receivedNumber % 10000;
-                        AddItemToListBox(speedReturn.ToString() + " Maxmimum pulse in 100ms");
+                        int recivedSpeed = receivedNumber % 10000;
+                        float recivedSpeedF = (float)recivedSpeed / 100;
+                        if (doorType == "Hinged door") {
+                            AddItemToListBox(speedReturn.ToString() + " Maxmimum pulse in 100ms");
+                        }
+                        
 
                     }
 

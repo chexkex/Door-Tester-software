@@ -55,11 +55,7 @@
             this.btnStopTest = new System.Windows.Forms.Button();
             this.btnContinue = new System.Windows.Forms.Button();
             this.waitTimeInput = new System.Windows.Forms.TextBox();
-            this.doorLengthCombobox = new System.Windows.Forms.ComboBox();
-            this.motorTypeCombobox = new System.Windows.Forms.ComboBox();
             this.currentChannelsCombobox = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -70,6 +66,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.btnPrintFroceContinuously = new System.Windows.Forms.Button();
             this.btnPrintCurrentContinuously = new System.Windows.Forms.Button();
+            this.btnCalibrateDoor = new System.Windows.Forms.Button();
+            this.doorLengthInput = new System.Windows.Forms.TextBox();
+            this.doorWeightInput = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnStopCalibrateDoor = new System.Windows.Forms.Button();
+            this.doorTypeComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -312,31 +315,6 @@
             this.waitTimeInput.Size = new System.Drawing.Size(100, 26);
             this.waitTimeInput.TabIndex = 33;
             // 
-            // doorLengthCombobox
-            // 
-            this.doorLengthCombobox.FormattingEnabled = true;
-            this.doorLengthCombobox.Items.AddRange(new object[] {
-            "700mm",
-            "800mm",
-            "900mm",
-            "1000mm"});
-            this.doorLengthCombobox.Location = new System.Drawing.Point(1517, 50);
-            this.doorLengthCombobox.Name = "doorLengthCombobox";
-            this.doorLengthCombobox.Size = new System.Drawing.Size(170, 28);
-            this.doorLengthCombobox.TabIndex = 34;
-            this.doorLengthCombobox.Text = " Door length";
-            // 
-            // motorTypeCombobox
-            // 
-            this.motorTypeCombobox.FormattingEnabled = true;
-            this.motorTypeCombobox.Items.AddRange(new object[] {
-            "Cido"});
-            this.motorTypeCombobox.Location = new System.Drawing.Point(1517, 102);
-            this.motorTypeCombobox.Name = "motorTypeCombobox";
-            this.motorTypeCombobox.Size = new System.Drawing.Size(170, 28);
-            this.motorTypeCombobox.TabIndex = 35;
-            this.motorTypeCombobox.Text = "Motor type";
-            // 
             // currentChannelsCombobox
             // 
             this.currentChannelsCombobox.FormattingEnabled = true;
@@ -344,34 +322,16 @@
             "1",
             "2",
             "3"});
-            this.currentChannelsCombobox.Location = new System.Drawing.Point(1517, 157);
+            this.currentChannelsCombobox.Location = new System.Drawing.Point(1434, 95);
             this.currentChannelsCombobox.Name = "currentChannelsCombobox";
             this.currentChannelsCombobox.Size = new System.Drawing.Size(170, 28);
             this.currentChannelsCombobox.TabIndex = 36;
             this.currentChannelsCombobox.Text = "Current channels";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1693, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 20);
-            this.label4.TabIndex = 37;
-            this.label4.Text = "Door length";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1693, 110);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 20);
-            this.label6.TabIndex = 38;
-            this.label6.Text = "Motor type";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1693, 160);
+            this.label7.Location = new System.Drawing.Point(1610, 103);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(130, 20);
             this.label7.TabIndex = 39;
@@ -397,7 +357,7 @@
             // 
             // btnCalibrateLoadcell
             // 
-            this.btnCalibrateLoadcell.Location = new System.Drawing.Point(1673, 541);
+            this.btnCalibrateLoadcell.Location = new System.Drawing.Point(1780, 52);
             this.btnCalibrateLoadcell.Name = "btnCalibrateLoadcell";
             this.btnCalibrateLoadcell.Size = new System.Drawing.Size(150, 77);
             this.btnCalibrateLoadcell.TabIndex = 42;
@@ -407,7 +367,7 @@
             // 
             // btnCalibrateLoadcellNoLoad
             // 
-            this.btnCalibrateLoadcellNoLoad.Location = new System.Drawing.Point(1673, 635);
+            this.btnCalibrateLoadcellNoLoad.Location = new System.Drawing.Point(1780, 146);
             this.btnCalibrateLoadcellNoLoad.Name = "btnCalibrateLoadcellNoLoad";
             this.btnCalibrateLoadcellNoLoad.Size = new System.Drawing.Size(150, 77);
             this.btnCalibrateLoadcellNoLoad.TabIndex = 43;
@@ -417,7 +377,7 @@
             // 
             // btnCalibrateLoadcellKnownLoad
             // 
-            this.btnCalibrateLoadcellKnownLoad.Location = new System.Drawing.Point(1673, 731);
+            this.btnCalibrateLoadcellKnownLoad.Location = new System.Drawing.Point(1780, 242);
             this.btnCalibrateLoadcellKnownLoad.Name = "btnCalibrateLoadcellKnownLoad";
             this.btnCalibrateLoadcellKnownLoad.Size = new System.Drawing.Size(150, 77);
             this.btnCalibrateLoadcellKnownLoad.TabIndex = 44;
@@ -427,7 +387,7 @@
             // 
             // knownLoadInput
             // 
-            this.knownLoadInput.Location = new System.Drawing.Point(1829, 756);
+            this.knownLoadInput.Location = new System.Drawing.Point(1936, 267);
             this.knownLoadInput.Name = "knownLoadInput";
             this.knownLoadInput.Size = new System.Drawing.Size(129, 26);
             this.knownLoadInput.TabIndex = 45;
@@ -435,7 +395,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1829, 731);
+            this.label10.Location = new System.Drawing.Point(1936, 242);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(116, 20);
             this.label10.TabIndex = 46;
@@ -444,7 +404,7 @@
             // btnPrintFroceContinuously
             // 
             this.btnPrintFroceContinuously.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnPrintFroceContinuously.Location = new System.Drawing.Point(1673, 828);
+            this.btnPrintFroceContinuously.Location = new System.Drawing.Point(1780, 339);
             this.btnPrintFroceContinuously.Name = "btnPrintFroceContinuously";
             this.btnPrintFroceContinuously.Size = new System.Drawing.Size(150, 77);
             this.btnPrintFroceContinuously.TabIndex = 47;
@@ -454,7 +414,7 @@
             // 
             // btnPrintCurrentContinuously
             // 
-            this.btnPrintCurrentContinuously.Location = new System.Drawing.Point(1499, 828);
+            this.btnPrintCurrentContinuously.Location = new System.Drawing.Point(1606, 339);
             this.btnPrintCurrentContinuously.Name = "btnPrintCurrentContinuously";
             this.btnPrintCurrentContinuously.Size = new System.Drawing.Size(150, 77);
             this.btnPrintCurrentContinuously.TabIndex = 48;
@@ -462,11 +422,82 @@
             this.btnPrintCurrentContinuously.UseVisualStyleBackColor = true;
             this.btnPrintCurrentContinuously.Click += new System.EventHandler(this.btnPrintCurrentContinuously_Click);
             // 
+            // btnCalibrateDoor
+            // 
+            this.btnCalibrateDoor.Location = new System.Drawing.Point(1407, 778);
+            this.btnCalibrateDoor.Name = "btnCalibrateDoor";
+            this.btnCalibrateDoor.Size = new System.Drawing.Size(150, 77);
+            this.btnCalibrateDoor.TabIndex = 49;
+            this.btnCalibrateDoor.Text = "Calibrate door";
+            this.btnCalibrateDoor.UseVisualStyleBackColor = true;
+            this.btnCalibrateDoor.Click += new System.EventHandler(this.btnCalibrateDoor_Click);
+            // 
+            // doorLengthInput
+            // 
+            this.doorLengthInput.Location = new System.Drawing.Point(1606, 775);
+            this.doorLengthInput.Name = "doorLengthInput";
+            this.doorLengthInput.Size = new System.Drawing.Size(134, 26);
+            this.doorLengthInput.TabIndex = 50;
+            // 
+            // doorWeightInput
+            // 
+            this.doorWeightInput.Location = new System.Drawing.Point(1606, 826);
+            this.doorWeightInput.Name = "doorWeightInput";
+            this.doorWeightInput.Size = new System.Drawing.Size(134, 26);
+            this.doorWeightInput.TabIndex = 51;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(1746, 778);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(132, 20);
+            this.label4.TabIndex = 52;
+            this.label4.Text = "Door length (mm)";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1746, 826);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(125, 20);
+            this.label6.TabIndex = 53;
+            this.label6.Text = "Door weight (kg)";
+            // 
+            // btnStopCalibrateDoor
+            // 
+            this.btnStopCalibrateDoor.Location = new System.Drawing.Point(1236, 779);
+            this.btnStopCalibrateDoor.Name = "btnStopCalibrateDoor";
+            this.btnStopCalibrateDoor.Size = new System.Drawing.Size(150, 77);
+            this.btnStopCalibrateDoor.TabIndex = 54;
+            this.btnStopCalibrateDoor.Text = "Stop calibrate door";
+            this.btnStopCalibrateDoor.UseVisualStyleBackColor = true;
+            this.btnStopCalibrateDoor.Click += new System.EventHandler(this.btnStopCalibrateDoor_Click);
+            // 
+            // doorTypeComboBox
+            // 
+            this.doorTypeComboBox.FormattingEnabled = true;
+            this.doorTypeComboBox.Items.AddRange(new object[] {
+            "Hinged door",
+            "Sliding door"});
+            this.doorTypeComboBox.Location = new System.Drawing.Point(1606, 879);
+            this.doorTypeComboBox.Name = "doorTypeComboBox";
+            this.doorTypeComboBox.Size = new System.Drawing.Size(170, 28);
+            this.doorTypeComboBox.TabIndex = 55;
+            this.doorTypeComboBox.Text = "Door type";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2124, 1090);
+            this.Controls.Add(this.doorTypeComboBox);
+            this.Controls.Add(this.btnStopCalibrateDoor);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.doorWeightInput);
+            this.Controls.Add(this.doorLengthInput);
+            this.Controls.Add(this.btnCalibrateDoor);
             this.Controls.Add(this.btnPrintCurrentContinuously);
             this.Controls.Add(this.btnPrintFroceContinuously);
             this.Controls.Add(this.label10);
@@ -477,11 +508,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.currentChannelsCombobox);
-            this.Controls.Add(this.motorTypeCombobox);
-            this.Controls.Add(this.doorLengthCombobox);
             this.Controls.Add(this.waitTimeInput);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.btnStopTest);
@@ -547,11 +574,7 @@
         private System.Windows.Forms.Button btnStopTest;
         private System.Windows.Forms.Button btnContinue;
         private System.Windows.Forms.TextBox waitTimeInput;
-        private System.Windows.Forms.ComboBox doorLengthCombobox;
-        private System.Windows.Forms.ComboBox motorTypeCombobox;
         private System.Windows.Forms.ComboBox currentChannelsCombobox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
@@ -562,6 +585,13 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnPrintFroceContinuously;
         private System.Windows.Forms.Button btnPrintCurrentContinuously;
+        private System.Windows.Forms.Button btnCalibrateDoor;
+        private System.Windows.Forms.TextBox doorLengthInput;
+        private System.Windows.Forms.TextBox doorWeightInput;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnStopCalibrateDoor;
+        private System.Windows.Forms.ComboBox doorTypeComboBox;
     }
 }
 
