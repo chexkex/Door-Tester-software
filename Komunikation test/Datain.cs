@@ -215,7 +215,13 @@ namespace Komunikation_test
                         {
                             float distance90Degrees = (float)((doorLenght * 2 * 3.141592) / 4);
                             float distanceOn10Pulses = (distance90Degrees / TotalPulseOneOpening) * 10;
-                            speedReturn = (int)(distanceOn10Pulses / (recivedSpeedF / 1000));
+                            float tempSpeed = (int)(distanceOn10Pulses / (recivedSpeedF / 1000));
+                            speedReturn = (int)tempSpeed;
+
+                            float tempSpeedSq = (tempSpeed / 1000) * (tempSpeed / 1000);
+                            float tempKinetic = (tempSpeedSq * (float)doorweight) / 4;
+                            Kineticenergy = (int)(tempKinetic * 1000);
+
                             AddItemToListBox(speedReturn.ToString() + " mm/s, Maxmimum speed");
                         }
                         else if (doorType == "Sliding door") {
