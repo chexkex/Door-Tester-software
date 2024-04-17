@@ -141,7 +141,7 @@ namespace Komunikation_test
                             if (currentReturn1 > currentLimit) { MessageBox.Show("Current has exceeded its limit value on current sensor 1. Press continue to run again"); errorOcurred = true; }
                             if (currentReturn2 > currentLimit) { MessageBox.Show("Current has exceeded its limit value on current sensor 2. Press continue to run again"); errorOcurred = true; }
                             if (currentReturn3 > currentLimit) { MessageBox.Show("Current has exceeded its limit value on current sensor 3. Press continue to run again"); errorOcurred = true; }
-                            if (calculatedKineticEnergy > kineticEnergyLimit) { MessageBox.Show("The kinetic energi has exceeded its limit value. Press continue to run again"); errorOcurred = true; }
+                            if ((Kineticenergy / 1000) > kineticEnergyLimit) { MessageBox.Show("The kinetic energi has exceeded its limit value. Press continue to run again"); errorOcurred = true; }
                             if (errorOcurred) { SetButtonEnabled(btnContinue, true); errorOcurred = false; }
                             else { RunNextTest(); }
 
@@ -221,8 +221,10 @@ namespace Komunikation_test
                             float tempSpeedSq = (tempSpeed / 1000) * (tempSpeed / 1000);
                             float tempKinetic = (tempSpeedSq * (float)doorweight) / 4;
                             Kineticenergy = (int)(tempKinetic * 1000);
+                            kinetickEnergytimes1000 = (int)tempKinetic;
 
                             AddItemToListBox(speedReturn.ToString() + " mm/s, Maxmimum speed");
+                            AddItemToListBox(Kineticenergy.ToString() + " mJ, Kinetic energy");
                         }
                         else if (doorType == "Sliding door") {
                             float distanceOn10Pulses = (float)(doorLenght / TotalPulseOneOpening) * 10;
@@ -232,7 +234,8 @@ namespace Komunikation_test
                             float tempSpeedSq = (tempSpeed / 1000) * (tempSpeed / 1000);
                             float tempKinetic = (tempSpeedSq * (float)doorweight) / 2;
                             Kineticenergy = (int)(tempKinetic * 1000);
-                            
+                            kinetickEnergytimes1000 = (int)tempKinetic;
+
                             //Kineticenergy = (int)((0.5 * doorweight * (speedReturn / 1000) * (speedReturn / 1000)) * 1000);
                             AddItemToListBox(speedReturn.ToString() + " mm/s, Maxmimum speed");
                             AddItemToListBox(Kineticenergy.ToString() + " mJ, Kinetic energy");

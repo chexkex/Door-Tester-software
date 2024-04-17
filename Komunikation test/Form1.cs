@@ -53,6 +53,7 @@ namespace Komunikation_test
         int doorweight = 0;
         int TotalPulseOneOpening = 0;
         string doorType;
+        int kinetickEnergytimes1000 = 0;
         
 
         float forceReturn = 0;
@@ -198,9 +199,9 @@ namespace Komunikation_test
             //else the test begins
             else
             {
-                if(IntConvet(currentChannels) == 1) { SaveDataToCSV(filePath, "Run times", "Max force", "Current 1", "Steps total", "Step diff", "Maximum speed mm/s", "Kinetic energy mJ"); }
-                else if (IntConvet(currentChannels) == 2) { SaveDataToCSV(filePath, "Run times", "Max force", "Current 1", "Current 2", "Steps total", "Step diff", "Maximum speed mm/s", "Kinetic energy mJ"); }
-                else if (IntConvet(currentChannels) == 3) { SaveDataToCSV(filePath, "Run times", "Max force", "Current 1", "Current 2", "Current 3", "Steps total", "Step diff", "Maximum speed mm/s", "Kinetic energy mJ"); }
+                if(IntConvet(currentChannels) == 1) { SaveDataToCSV(filePath, "Run times", "Max force (N)", "Current 1 (mA)", "Steps total", "Step diff", "Maximum speed (mm/s)", "Kinetic energy (mJ)"); }
+                else if (IntConvet(currentChannels) == 2) { SaveDataToCSV(filePath, "Run times", "Max force (N)", "Current 1 (mA)", "Current 2 (mA)", "Steps total", "Step diff", "Maximum speed (mm/s)", "Kinetic energy (mJ)"); }
+                else if (IntConvet(currentChannels) == 3) { SaveDataToCSV(filePath, "Run times", "Max force (N)", "Current 1 (mA)", "Current 2 (mA)", "Current 3 (mA)", "Steps total", "Step diff", "Maximum speed (mm/s)", "Kinetic energy (mJ)"); }
                 btnRunTest.Enabled = false;
                 btnStopTest.Enabled = true;
                 btnRunTestOneTime.Enabled = false;
