@@ -68,6 +68,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Serial_com.cs" />
+    <EmbeddedResource Include="Datain.resx">
+      <DependentUpon>Datain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
