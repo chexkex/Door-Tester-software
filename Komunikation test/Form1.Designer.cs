@@ -508,6 +508,7 @@
             this.PulseMesCombobox.Name = "PulseMesCombobox";
             this.PulseMesCombobox.Size = new System.Drawing.Size(243, 28);
             this.PulseMesCombobox.TabIndex = 57;
+            this.PulseMesCombobox.Text = "Measurement type";
             // 
             // Form1
             // 
