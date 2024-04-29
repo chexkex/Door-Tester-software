@@ -430,6 +430,7 @@ namespace Komunikation_test
                     SetTextBoxReadOnly(doorWeightInput, true);
                     SendData(411131);
                     doorTypeComboBox.Enabled = false;
+                    PulseMesCombobox.Enabled = false;
                     MessageBox.Show("Open the door manually and let it close.");
                     SendData(111118);
 
@@ -459,6 +460,7 @@ namespace Komunikation_test
             SetTextBoxReadOnly(doorLengthInput, false);
             SetButtonEnabled(btnRecalibrateDoor, false);
             doorTypeComboBox.Enabled = true;
+            PulseMesCombobox.Enabled = true;
         }
     }
 }
