@@ -168,7 +168,7 @@ namespace Komunikation_test
                         int remainingNumber = receivedNumber % 10000;
                         forceReturn = remainingNumber / 10.0f;
                         AddItemToListBox(forceReturn.ToString() + " N, Maximum force");
-
+                        
                     }
 
                     if (receivedNumber > 129999 && receivedNumber < 140000)
@@ -208,7 +208,7 @@ namespace Komunikation_test
 
                     if (receivedNumber > 179999 && receivedNumber < 190000)
                     {
-
+                        
                         int recivedSpeed = receivedNumber % 10000;
                         float recivedSpeedF = (float)recivedSpeed / 100;
                         if (doorType == "Hinged door")
@@ -225,6 +225,7 @@ namespace Komunikation_test
 
                             AddItemToListBox(speedReturn.ToString() + " mm/s, Maxmimum speed");
                             AddItemToListBox(Kineticenergy.ToString() + " mJ, Kinetic energy");
+                            
                         }
                         else if (doorType == "Sliding door") {
                             float distanceOn10Pulses = (float)(doorLenght / TotalPulseOneOpening) * 10;

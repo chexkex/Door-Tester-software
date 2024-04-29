@@ -74,6 +74,7 @@
             this.btnStopCalibrateDoor = new System.Windows.Forms.Button();
             this.doorTypeComboBox = new System.Windows.Forms.ComboBox();
             this.btnRecalibrateDoor = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -497,11 +498,23 @@
             this.btnRecalibrateDoor.UseVisualStyleBackColor = true;
             this.btnRecalibrateDoor.Click += new System.EventHandler(this.btnRecalibrateDoor_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Pulse measurement",
+            "Timer measurement"});
+            this.comboBox1.Location = new System.Drawing.Point(1606, 721);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(243, 28);
+            this.comboBox1.TabIndex = 57;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2124, 1090);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btnRecalibrateDoor);
             this.Controls.Add(this.doorTypeComboBox);
             this.Controls.Add(this.btnStopCalibrateDoor);
@@ -605,6 +618,7 @@
         private System.Windows.Forms.Button btnStopCalibrateDoor;
         private System.Windows.Forms.ComboBox doorTypeComboBox;
         private System.Windows.Forms.Button btnRecalibrateDoor;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

@@ -55,7 +55,7 @@ namespace Komunikation_test
         }
 
         //Saving to file
-        private void SaveDataToCSV(string filePath, params object[] values)
+        private void SaveDataToCSV(string filePath, params object[] values) 
         {
             string line = string.Join(";", values);
 
