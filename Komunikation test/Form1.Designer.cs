@@ -506,7 +506,7 @@
             "Timer measurement"});
             this.PulseMesCombobox.Location = new System.Drawing.Point(1606, 721);
             this.PulseMesCombobox.Name = "PulseMesCombobox";
-            this.PulseMesCombobox.Size = new System.Drawing.Size(200, 28);
+            this.PulseMesCombobox.Size = new System.Drawing.Size(208, 28);
             this.PulseMesCombobox.TabIndex = 57;
             this.PulseMesCombobox.Text = "Measurement type";
             // 
