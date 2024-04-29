@@ -53,6 +53,7 @@ namespace Komunikation_test
         int doorweight = 0;
         int TotalPulseOneOpening = 0;
         string doorType;
+        string measurment;
         int kinetickEnergytimes1000 = 0;
         
 
@@ -406,31 +407,40 @@ namespace Komunikation_test
             doorLenght = IntConvet(doorLengthInput.Text.Trim());
             doorweight = IntConvet(doorWeightInput.Text.Trim());
             doorType = ReadComboBox(doorTypeComboBox);
+            measurment = ReadComboBox(PulseMesCombobox);
 
+            if (measurment == "Pulse measurement") {
+                if (doorweight == 0 || doorLenght == 0)
+                {
+                    MessageBox.Show("Door information is missing!");
+                }
+                else if (string.IsNullOrEmpty(doorType)) { MessageBox.Show("Door type is missing!"); }
+                else
+                {
+                    SetButtonEnabled(btnCalibrateDoor, false);
+                    SetButtonEnabled(btnStopCalibrateDoor, true);
+                    SetButtonEnabled(btnRunTestOneTime, false);
+                    SetButtonEnabled(btnRunTest, false);
+                    SetButtonEnabled(btnCalibrateLoadcell, false);
+                    SetButtonEnabled(btnPrintCurrentContinuously, false);
+                    SetButtonEnabled(btnPrintFroceContinuously, false);
+                    doorIsInCalibration = true;
+                    TotalPulseOneOpening = 0;
+                    SetTextBoxReadOnly(doorLengthInput, true);
+                    SetTextBoxReadOnly(doorWeightInput, true);
+                    SendData(411131);
+                    doorTypeComboBox.Enabled = false;
+                    MessageBox.Show("Open the door manually and let it close.");
+                    SendData(111118);
 
-            if (doorweight == 0 || doorLenght == 0)
-            {
-                MessageBox.Show("Door information is missing!");
+                }
             }
-            else if (string.IsNullOrEmpty(doorType)) { MessageBox.Show("Door type is missing!"); }
             else
             {
-                SetButtonEnabled(btnCalibrateDoor, false);
-                SetButtonEnabled(btnStopCalibrateDoor, true);
-                SetButtonEnabled(btnRunTestOneTime, false);
-                SetButtonEnabled(btnRunTest, false);
-                SetButtonEnabled(btnCalibrateLoadcell, false);
-                SetButtonEnabled(btnPrintCurrentContinuously, false);
-                SetButtonEnabled(btnPrintFroceContinuously, false);
-                doorIsInCalibration = true;
-                TotalPulseOneOpening = 0;
-                SetTextBoxReadOnly(doorLengthInput, true);
-                SetTextBoxReadOnly(doorWeightInput, true);
-                SendData(411131);
-                doorTypeComboBox.Enabled = false;
-                MessageBox.Show("Open the door manually and let it close.");
-                
+                SendData(111119);
             }
+
+            
             
         }
 
