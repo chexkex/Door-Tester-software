@@ -75,7 +75,6 @@
             this.doorTypeComboBox = new System.Windows.Forms.ComboBox();
             this.btnRecalibrateDoor = new System.Windows.Forms.Button();
             this.PulseMesCombobox = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -511,21 +510,11 @@
             this.PulseMesCombobox.TabIndex = 57;
             this.PulseMesCombobox.Text = "Measurement type";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1606, 212);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(60, 20);
-            this.label11.TabIndex = 58;
-            this.label11.Text = "label11";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2124, 1090);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.PulseMesCombobox);
             this.Controls.Add(this.btnRecalibrateDoor);
             this.Controls.Add(this.doorTypeComboBox);
@@ -631,7 +620,6 @@
         private System.Windows.Forms.ComboBox doorTypeComboBox;
         private System.Windows.Forms.Button btnRecalibrateDoor;
         private System.Windows.Forms.ComboBox PulseMesCombobox;
-        private System.Windows.Forms.Label label11;
     }
 }
 
