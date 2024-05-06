@@ -75,7 +75,6 @@
             this.doorTypeComboBox = new System.Windows.Forms.ComboBox();
             this.btnRecalibrateDoor = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -510,21 +509,11 @@
             this.comboBox1.Size = new System.Drawing.Size(243, 28);
             this.comboBox1.TabIndex = 57;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1558, 242);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(60, 20);
-            this.label11.TabIndex = 58;
-            this.label11.Text = "label11";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2124, 1090);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btnRecalibrateDoor);
             this.Controls.Add(this.doorTypeComboBox);
@@ -630,7 +619,6 @@
         private System.Windows.Forms.ComboBox doorTypeComboBox;
         private System.Windows.Forms.Button btnRecalibrateDoor;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label11;
     }
 }
 
