@@ -228,7 +228,8 @@ namespace Komunikation_test
                             
                         }
                         else if (doorType == "Sliding door") {
-                            float distanceOn10Pulses = (float)(doorLenght / TotalPulseOneOpening) * 10;
+                            //float distanceOn10Pulses = (float)(doorLenght / TotalPulseOneOpening) * 10;
+                            float distanceOn10Pulses = ((float)doorLenght / TotalPulseOneOpening) * 10;
                             float tempSpeed = (distanceOn10Pulses / (recivedSpeedF / 1000));
                             speedReturn = (int)tempSpeed;
 
@@ -240,12 +241,13 @@ namespace Komunikation_test
                             //Kineticenergy = (int)((0.5 * doorweight * (speedReturn / 1000) * (speedReturn / 1000)) * 1000);
                             AddItemToListBox(speedReturn.ToString() + " mm/s, Maxmimum speed");
                             AddItemToListBox(Kineticenergy.ToString() + " mJ, Kinetic energy");
+                            
                         }
                         
 
                     }
 
-                    if (receivedNumber > 209999 && receivedNumber < 220000) { totalPulseLong = receivedNumber % 10000; if (totalPulseLong > 0) { totalPulseToLong = true; } }
+                    if (receivedNumber > 209999 && receivedNumber < 220000) { totalPulseLong = receivedNumber % 10000; if (totalPulseLong >= 0) { totalPulseToLong = true; } }
 
 
                 }
