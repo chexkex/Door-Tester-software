@@ -13,7 +13,7 @@ namespace Komunikation_test
         //Starting next test if count is still over 1
         public async void RunNextTest()
         {
-            if (timesToRun > 0) { await Task.Delay(waitTime * 1000); SendData(111111); }
+            if (timesToRun > 0) { await Task.Delay(waitTime * 1000); SendData(111111); ResetTime();}
 
             else
             {
@@ -100,10 +100,10 @@ namespace Komunikation_test
         }
 
         //Aprox time
-        private double ResetTime()
+        private int ResetTime()
         {
             DateTime currentTime = DateTime.Now;
-            double secondsElapsed = (currentTime - lastCallTime).TotalSeconds;
+            int secondsElapsed = (int)(currentTime - lastCallTime).TotalSeconds;
             lastCallTime = currentTime;
             return secondsElapsed;
         }

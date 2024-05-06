@@ -231,6 +231,7 @@ namespace Komunikation_test
                 waitTimeInput.ReadOnly = true;
 
                 testing = true;
+                ResetTime();
                 PreventSleep();
                 SendData(111111);
             }

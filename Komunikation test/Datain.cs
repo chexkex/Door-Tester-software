@@ -110,11 +110,16 @@ namespace Komunikation_test
                         }
                         else { hallTotalReturn = totalPulse; }
                         AddItemToListBox(hallTotalReturn.ToString() + " Total steps");
-                        double time = ResetTime();
-                        AddItemToListBox("Time to go until test i done");
+                        int timeLast = ResetTime();
+                        int timeForOneCycle = (timeLast + waitTime) * timesToRun;
+
+                        int hoursLeft = timeForOneCycle / 3600;
+                        int minutesLeft = (timeForOneCycle % 3600) / 60;
+
 
                         if (timesToRun > 0) { 
                             AddItemToListBox("Ready for new run, Waiting for timer");
+                            AddItemToListBox(hoursLeft + " h and " + " min left on the test");
                             
                         }
 
