@@ -193,7 +193,7 @@ namespace Komunikation_test
             currentChannels = ReadComboBox(currentChannelsCombobox);
 
             //controls input values and not run the test
-            if (forceLimit == 0 || currentLimit == 0 || kineticEnergyLimit == 0 || timesToRun == 0 || waitTime == 0 || forceLimit > 1000 || currentLimit > 6000 || timesToRun > 50000) { MessageBox.Show("Limit values are missing or out of range"); }
+            if (forceLimit == 0 || currentLimit == 0 || kineticEnergyLimit == 0 || timesToRun == 0 || waitTime == 0 || forceLimit > 1000 || currentLimit > 10000 || timesToRun > 50000) { MessageBox.Show("Limit values are missing or out of range"); }
             else if (string.IsNullOrEmpty(currentChannels)) { MessageBox.Show("Current channels is missing");  }
             else if (!doorIsCalibrated) { MessageBox.Show("Door is not calibrated"); }
             
