@@ -98,5 +98,14 @@ namespace Komunikation_test
         {
             SetThreadExecutionState(ES_CONTINUOUS);
         }
+
+        //Aprox time
+        private double ResetTime()
+        {
+            DateTime currentTime = DateTime.Now;
+            double secondsElapsed = (currentTime - lastCallTime).TotalSeconds;
+            lastCallTime = currentTime;
+            return secondsElapsed;
+        }
     }
 }

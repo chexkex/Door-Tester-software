@@ -66,6 +66,8 @@ namespace Komunikation_test
         int totalPulse = 0;
         int totalPulseLong = 0;
         int Kineticenergy = 0;
+
+        private DateTime lastCallTime;
         
 
 
@@ -76,6 +78,7 @@ namespace Komunikation_test
             InitializeSerialPort();
             LoadAvailablePorts();
             LoadBaudRates();
+            ResetTime();
 
             //turning off buttens
             btnDisconnect.Enabled = false;
@@ -94,6 +97,8 @@ namespace Komunikation_test
             SetButtonEnabled(btnCalibrateDoor, false);
             SetButtonEnabled(btnStopCalibrateDoor, false);
             SetButtonEnabled(btnRecalibrateDoor, false);
+            comboBoxPort.Enabled = true;
+            comboBoxBaudRate.Enabled = true;
             
         }
 
@@ -131,6 +136,8 @@ namespace Komunikation_test
                     SetButtonEnabled(btnPrintFroceContinuously, true);
                     SetButtonEnabled(btnPrintCurrentContinuously, true);
                     SetButtonEnabled(btnCalibrateDoor, true);
+                    comboBoxPort.Enabled = false;
+                    comboBoxBaudRate.Enabled = false;
                 }
                 else { MessageBox.Show("Serial port is already open."); }
 
@@ -155,6 +162,8 @@ namespace Komunikation_test
                     SetButtonEnabled(btnCalibrateLoadcell, false);
                     SetButtonEnabled(btnPrintFroceContinuously, false);
                     SetButtonEnabled(btnPrintCurrentContinuously, false);
+                    comboBoxBaudRate.Enabled = true;
+                    comboBoxPort.Enabled = true;
                 }
                 else { MessageBox.Show("Serial port is already closed."); }
 
@@ -212,6 +221,7 @@ namespace Komunikation_test
                 SetButtonEnabled(btnPrintFroceContinuously, false);
                 SetButtonEnabled(btnPrintCurrentContinuously, false);
                 SetButtonEnabled(btnCalibrateDoor, false);
+                SetButtonEnabled(btnRecalibrateDoor, false);
 
                 forceLimitInput.ReadOnly = true;
                 currentLimitInput.ReadOnly = true;
