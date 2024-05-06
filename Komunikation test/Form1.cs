@@ -302,7 +302,7 @@ namespace Komunikation_test
         {
             btnStopTest.Enabled = false;    
             timesToRun = 0;
-            AddItemToListBox("Test will be stoped after this run");
+            AddItemToListBox("Test will be stoped after next run");
         }
 
         private void btnContinue_Click(object sender, EventArgs e)

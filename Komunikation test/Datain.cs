@@ -119,7 +119,7 @@ namespace Komunikation_test
 
                         if (timesToRun > 0) { 
                             AddItemToListBox("Ready for new run, Waiting for timer");
-                            AddItemToListBox(hoursLeft + " h and " + " min left on the test");
+                            AddItemToListBox(hoursLeft + " h and " + minutesLeft + " min until test is done");
                             
                         }
 
